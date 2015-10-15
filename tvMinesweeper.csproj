@@ -76,6 +76,7 @@
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchProfiling>true</MtouchProfiling>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <CodesignProvision>07396d8c-9165-45c1-81d1-3572f4d60652</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

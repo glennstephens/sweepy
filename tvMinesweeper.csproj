@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectTypeGuids>{06FA79CB-D6CD-4721-BB4B-1BD202089C55};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{3FD1338D-1FC8-49A1-B46D-9AAEB6E8A17D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>tvMinesweeper</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>tvMinesweeper</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <MtouchUseSGen>true</MtouchUseSGen>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchProfiling>true</MtouchProfiling>
+    <CodesignProvision>07396d8c-9165-45c1-81d1-3572f4d60652</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchUseSGen>true</MtouchUseSGen>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchUseSGen>true</MtouchUseSGen>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchUseSGen>true</MtouchUseSGen>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.TVOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spaceship.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spaceship.imageset\Spaceship.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\waterspot.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\clickedblock_grey.png" />
+    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\nonclickedblock.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\Clicked Spot.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\Clicked Spot%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\Clicked Spot%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\Unclicked Spot.png" />
+    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\Unclicked Spot%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\Unclicked Spot%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Bomb Image.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Unclicked Spot%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Bomb Image%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Bomb Image%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\Flag Spot.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\Flag Spot%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\Flag Spot%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\nonclickedblock.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\star.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\nonclickedblock_star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GameScene.sks" />
+    <BundleResource Include="Resources\explosion.sks" />
+    <BundleResource Include="Resources\spark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="GameViewController.cs" />
+    <Compile Include="GameViewController.designer.cs">
+      <DependentUpon>GameViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameScene.cs" />
+    <Compile Include="GameLogic\ClickResult.cs" />
+    <Compile Include="GameLogic\LevelDetails.cs" />
+    <Compile Include="GameLogic\MineCell.cs" />
+    <Compile Include="GameLogic\MineCellDisplayType.cs" />
+    <Compile Include="GameLogic\MinesweeperLogic.cs" />
+    <Compile Include="GameLogic\Spot.cs" />
+    <Compile Include="GameLogic\AllLevels.cs" />
+    <Compile Include="TVControllerAction.cs" />
+    <Compile Include="ArchiveBasedNode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Main.storyboard" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\TVOS\Xamarin.TVOS.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="GameLogic\" />
+  </ItemGroup>
+</Project>

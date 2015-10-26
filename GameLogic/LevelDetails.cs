@@ -38,6 +38,11 @@ namespace tvMinesweeper
 			get;
 			set;
 		} = 0;
+
+		public int LevelNumber {
+			get;
+			set;
+		}
 	}
 }
 

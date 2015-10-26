@@ -86,31 +86,32 @@
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\Spaceship.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\Spaceship.imageset\Spaceship.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\waterspot.png" />
     <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\clickedblock_grey.png" />
     <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\nonclickedblock.png" />
     <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\Clicked Spot.png" />
     <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\Clicked Spot%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\Clicked Spot%403x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\Unclicked Spot.png" />
-    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\Unclicked Spot%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\Unclicked Spot%403x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Bomb Image.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Unclicked Spot%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Bomb Image%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Waterspot.imageset\Bomb Image%403x.png" />
     <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\Flag Spot.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\Flag Spot%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\Flag Spot%403x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\nonclickedblock.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\star.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\nonclickedblock_star.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Flag.imageset\40x40 Button-flag.png" />
+    <ImageAsset Include="Resources\Images.xcassets\UnclickedSpot.imageset\40x40 Button-clicked.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot1.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot2.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot3.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot4.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot5.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot6.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot7.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot8.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot1.imageset\40x40 Button-1.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot2.imageset\40x40 Button-2.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot3.imageset\40x40 Button-3.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot4.imageset\40x40 Button-4.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot5.imageset\40x40 Button-5.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot6.imageset\40x40 Button-6.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot7.imageset\40x40 Button-7.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Spot8.imageset\40x40 Button-8.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ClickedSpot.imageset\40x40 Button-blank-BW.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\GameScene.sks" />
@@ -136,8 +137,8 @@
     <Compile Include="GameLogic\MinesweeperLogic.cs" />
     <Compile Include="GameLogic\Spot.cs" />
     <Compile Include="GameLogic\AllLevels.cs" />
-    <Compile Include="TVControllerAction.cs" />
     <Compile Include="ArchiveBasedNode.cs" />
+    <Compile Include="GameLogic\TVControllerAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
@@ -145,5 +146,10 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\TVOS\Xamarin.TVOS.CSharp.targets" />
   <ItemGroup>
     <Folder Include="GameLogic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\pixelart.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

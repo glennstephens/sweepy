@@ -10,6 +10,21 @@ namespace tvMinesweeper
 		public List<MineCell> AllMines = new List<MineCell> ();
 		public LevelDetails CurrentLevel;
 
+		public int MinesLeft { 
+			get; 
+			set; 
+		}
+
+		public int MinesFlagged { 
+			get; 
+			set; 
+		}
+
+		public int MinesRemaining {
+			get;
+			set;
+		}
+
 		public bool IsGameOver {
 			get;
 			set;
@@ -100,10 +115,12 @@ namespace tvMinesweeper
 			MapRows = level.Rows;
 			MapColumns = level.Columns;
 			NumberOfSpots = level.MineCount;
-
+			MinesFlagged = 0;
+			MinesRemaining = level.MineCount;
 			IsGameOver = false;
 
 			Map = new List<MineCell> ();
+			FlaggedSpots = new List<Spot> ();
 			visitedIndex.Clear ();
 
 			for (int y = 0; y < MapRows; y++)
@@ -167,6 +184,8 @@ namespace tvMinesweeper
 			return AllMines.Select (c => new Spot (c.X, c.Y)).Take (3).ToList ();
 		}
 
+		public List<Spot> FlaggedSpots = new List<Spot>();
+
 		public ClickResult FlagSpot(int x, int y)
 		{
 			var result = new ClickResult ();
@@ -178,12 +197,35 @@ namespace tvMinesweeper
 			if (!cell.IsFlagged) {
 				cell.WasClicked = true;
 				cell.IsFlagged = true;
+				MinesFlagged++;
+
+				FlaggedSpots.Add (spot);
 			} else {
 				cell.WasClicked = false;
 				cell.IsFlagged = false;
+				MinesFlagged--;
+				FlaggedSpots.Remove (spot);
 			}
 
 			result.AffectedSpots.Add (spot);
+
+			if (MinesFlagged == CurrentLevel.MineCount) {
+				// Check to see if we have won, otherwise we end the game
+				foreach (var s in FlaggedSpots) {
+					var c = this [s.X, s.Y];
+					if (!c.HasItem) {
+						result.GameOver = true;
+						break;
+					}
+				}
+
+				if (!result.GameOver) {
+					// Load the next level
+					SetupBoard (AllLevels.GetNextLevel ());
+
+					result.GameReset = true;
+				}
+			}
 
 			return result;
 		}

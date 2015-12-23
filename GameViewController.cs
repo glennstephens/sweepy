@@ -69,10 +69,10 @@ namespace tvMinesweeper
 			skView.PresentScene (scene);
 		}
 
-		public override bool PrefersStatusBarHidden ()
-		{
-			return true;
-		}
+//		public override bool PrefersStatusBarHidden ()
+//		{
+//			return true;
+//		}
 	}
 }
 

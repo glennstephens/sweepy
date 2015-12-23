@@ -20,18 +20,22 @@ namespace tvMinesweeper
 		nfloat cellHeight;
 
 		Dictionary<int, SKSpriteNode> spritesForLocation = new Dictionary<int, SKSpriteNode>();
-		SKShapeNode currentSpot;
+		SKSpriteNode currentSpot;
 		SKLabelNode gameOverNode;
 
 		SKLabelNode gameOverNode2;
 
-		const string displayFont = "Pixel-Art Regular"; // "AvenirNext-Regular";
+		//const string displayFont = "Pixel-Art Regular"; 
+		const string displayFont = "Avenir-Book";
+		const string displayFontGameOver = "Avenir-Medium";
+		const float displayFontSize = 32f;
+		const float displayFontSizeGameOver = 130f;
 
 		public override void DidMoveToView (SKView view)
 		{
-			map = new MinesweeperMap ();
+			BackgroundColor = UIColor.White;
 
-			//map.SetupBoard (AllLevels.Levels[AllLevels.Levels.Length-1]);
+			map = new MinesweeperMap ();
 			map.SetupBoard (AllLevels.GetFirstLevel ());
 
 			DisplayMap ();
@@ -65,41 +69,61 @@ namespace tvMinesweeper
 			CurrentX = AllLevels.CurrentLevel.StartX;
 			CurrentY = AllLevels.CurrentLevel.StartY;
 
-			currentSpot?.RemoveFromParent ();
-
-			currentSpot = SKShapeNode.FromRect (new CGSize (cellWidth, cellHeight), 4f);
-			currentSpot.FillColor = UIColor.Clear;
-			currentSpot.StrokeColor = UIColor.Red;
-			currentSpot.LineWidth = 5f;
-			currentSpot.Position = GetCellPosition (CurrentX, CurrentY);
-			var action = SKAction.RepeatActionForever (
-				SKAction.Sequence (
-					SKAction.ScaleBy (2f, 0.5),
-					SKAction.ScaleBy (0.5f, 0.5)
-				));
-			currentSpot.RunAction (action);
-			AddChild (currentSpot);
+			UpdateCurrentSpot ();
 
 			// Add the text information (Level <number>: <name>)
+			if (levelNumber != null) {
+				levelNumber.RunAction (SKAction.RemoveFromParent ());
+				levelNumber = null;
+			}
+			if (levelName != null) {
+				levelName.RunAction (SKAction.RemoveFromParent ());
+				levelName = null;
+			}
 
-			levelNumberName = new SKLabelNode (displayFont) {
+			levelName = new SKLabelNode (displayFont) {
 				Text = map.CurrentLevel.LevelName,
-				Position = GetCellPosition (1, -1),
+				Position = new CGPoint(GetCellPosition (0, -1).X, Scene.Frame.Height - 33f),
 				FontColor = UIColor.Black,
-				FontSize = 17f,
+				FontSize = displayFontSize,
 				HorizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
 			};
-			AddChild (levelNumberName);
+			AddChild (levelName);
+
+			levelNumber = new SKLabelNode (displayFont) {
+				Text = map.CurrentLevel.LevelName,
+				Position = new CGPoint(GetCellPosition (map.MapColumns, -1).X / 2, levelName.Position.Y),
+				FontColor = UIColor.Black,
+				FontSize = displayFontSize,
+				HorizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+			};
+			AddChild (levelNumber);
 
 			UpdateLevelDisplay ();
 		}
 
-		SKLabelNode levelNumberName;
+		SKLabelNode levelNumber, levelName;
+
+		void UpdateCurrentSpot()
+		{
+			currentSpot?.RemoveFromParent ();
+
+			currentSpot = GetSpriteForCell(CurrentX, CurrentY);
+			var action = SKAction.RepeatActionForever (
+				SKAction.Sequence (
+					SKAction.ScaleBy (2f, 0.6),
+					SKAction.ScaleBy (0.5f, 0.6)
+				));
+			currentSpot.RunAction (action);
+			AddChild (currentSpot);
+		}
 
 		void UpdateLevelDisplay ()
 		{
-			levelNumberName.Text = string.Format ("{0} - Flagged: {1}; Mines Left: {2}", 
-				map.CurrentLevel.LevelName, map.MinesFlagged, map.MinesLeft);
+			levelNumber.Text = string.Format ("Flagged: {0}. Mines Left: {1}", 
+			                                      map.MinesFlagged, map.MinesLeft);
+			
+			levelName.Text = map.CurrentLevel.LevelName;
 		}
 
 		public void ProcessControllerAction (TVControllerAction item)
@@ -155,20 +179,20 @@ namespace tvMinesweeper
 					var allMines = map.GetAllMinesNear (new Spot (CurrentX, CurrentY));
 					allMines.ForEach (MakeExplosionAtPoint);
 
-					gameOverNode = new SKLabelNode (displayFont) {
+					gameOverNode = new SKLabelNode (displayFontGameOver) {
 						Text = "Game Over",
-						Position = new CGPoint (500, 410),
+							Position = new CGPoint(Scene.Frame.GetMidX(), Scene.Frame. GetMidY()),
 						FontColor = UIColor.Blue,
-						FontSize = 100f,
+						FontSize = displayFontSizeGameOver,
 						VerticalAlignmentMode = SKLabelVerticalAlignmentMode.Center,
 						HorizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
 					};
-
-					gameOverNode2 = new SKLabelNode (displayFont) {
+						float miniBuffer = 3f;
+					gameOverNode2 = new SKLabelNode (displayFontGameOver) {
 						Text = "Game Over",
-						Position = new CGPoint (502, 408),
-						FontColor = UIColor.Gray,
-						FontSize = 100f,
+							Position = new CGPoint(gameOverNode.Position.X + miniBuffer, gameOverNode.Position.Y - miniBuffer),
+							FontColor = UIColor.FromRGBA(0.0f, 0f, 0f, 0.25f),
+						FontSize = displayFontSizeGameOver,
 						VerticalAlignmentMode = SKLabelVerticalAlignmentMode.Center,
 						HorizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
 					};
@@ -182,6 +206,9 @@ namespace tvMinesweeper
 					gameOverNode2.RunAction (SKAction.RotateByAngle (
 						(nfloat)(Math.PI / 180) * 720, 
 						1.0));
+					
+					currentSpot.RunAction(SKAction.RemoveFromParent());
+					currentSpot = null;
 				}
 
 				if (actionDetails.GameReset) {
@@ -193,6 +220,8 @@ namespace tvMinesweeper
 
 				break;
 			}
+
+			UpdateCurrentSpot();
 
 			currentSpot.RunAction (SKAction.MoveTo (
 				GetCellPosition (CurrentX, CurrentY), 0.25
@@ -221,9 +250,14 @@ namespace tvMinesweeper
 		}
 			
 		const string UnclickedSpotImageName = "UnclickedSpot";
-		const string BombImageName = "Waterspot";
+		const string BombImageName = "bomb";
 		const string ClickedSpotImageName = "ClickedSpot";
 		const string FlagImageName = "Flag";
+
+		SKSpriteNode GetSpriteForCell(int x, int y)
+		{
+			return GetSpriteForCell(map[x, y]);
+		}
 
 		SKSpriteNode GetSpriteForCell(MineCell cell)
 		{
@@ -285,8 +319,11 @@ namespace tvMinesweeper
 
 		void MoveCurrentPositionToTop()
 		{
-			RemoveChildren (new SKNode[] {currentSpot});
-			AddChild (currentSpot);
+			if (currentSpot != null)
+			{
+				RemoveChildren(new SKNode[] { currentSpot });
+				AddChild(currentSpot);
+			}
 		}
 
 		public override void Update (double currentTime)

@@ -22,13 +22,13 @@
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>XSAppIconAssets</key>
-	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleName</key>
 	<string>Sweepy</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>pixelart.ttf</string>
 	</array>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Images.xcassets/App Icon &amp; Top Shelf Image.brandassets</string>
 </dict>
 </plist>

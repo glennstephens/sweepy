@@ -156,6 +156,7 @@ namespace tvMinesweeper
 		void ClearSpacesAroundSpot (Spot spot, List<Spot> affectedSpots, List<int> visitedIndexes)
 		{
 			var items = GetItemsAroundSpot (spot.X, spot.Y);
+
 			items.ForEach (c => {
 				var actualIndex = LocationForXY (c.X, c.Y);
 				if (!c.HasItem)
@@ -164,9 +165,14 @@ namespace tvMinesweeper
 						if (c.NearbyCount >= 0) {
 							c.WasClicked = true;
 							visitedIndexes.Add (actualIndex);
+
 							var s = new Spot (c.X, c.Y);
 							affectedSpots.Add (s);
-							ClearSpacesAroundSpot (s, affectedSpots, visitedIndexes);
+
+							if (c.NearbyCount == 0)
+							{
+								ClearSpacesAroundSpot(s, affectedSpots, visitedIndexes);
+							}
 						} else {
 							visitedIndexes.Add (actualIndex);
 						}
